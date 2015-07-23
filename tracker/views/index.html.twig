@@ -36,8 +36,10 @@
                                 <ul>
                                     {% for section, values in connexion_data %}
                                     <li>
-                                        {{ section }}: 
-                                        <ul>
+                                        <span class="foldToggle">
+                                            {{ section }} <strong>+</strong> 
+                                        </span>
+                                        <ul style="display: none">
                                             {% for key, value in values %}
                                             <li>{{ key }}: {{ value }}</li>
                                             {% endfor %}    
