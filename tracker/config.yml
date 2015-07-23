@@ -1,0 +1,3 @@
+tracker:
+    port: 4000
+    strategy: adid # cookie or adid TODO implement an evercookie strategy https://github.com/samyk/evercookie

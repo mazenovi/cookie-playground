@@ -23,7 +23,14 @@
                     {% for id, info in data %}
                         {% for k, connexion_data in info %}
                         <tr>                        
-                            <td>{{ id }}</td>
+                            <td>
+                                {{ id }}
+                                {% if connexion_data.Tracker.strategy == 'cookie'%}
+                                    <br />(cookie ID)
+                                {% elseif connexion_data.Tracker.strategy == 'adid'%}
+                                    <br />(Ad ID = md5(concatenation of <a href="https://panopticlick.eff.org">https://panopticlick.eff.org</a> listed elements))
+                                {% endif %}
+                            </td>
                             <td>{{ k }}</td>
                             <td>
                                 <ul>
