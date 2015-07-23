@@ -15,6 +15,11 @@ class YamlStorage implements Storage
         }
     }
 
+    public function all()
+    {
+        return Yaml::parse(file_get_contents($this->filename));
+    }
+
     public function get($id, \DateTime $date = null)
     {
         $data = Yaml::parse(file_get_contents($this->filename));

@@ -28,11 +28,9 @@ $app->get('/dashboard', function (Request $request) use ($app) {
         return 'No data yet...';
     }
 
-    $id   = $request->cookies->get($app['cookie.name']);
-    $data = $app['storage']->get($id);
+    $data = $app['storage']->all();
 
     return $app['twig']->render('index.html.twig', [
-        'trackerId' => $id,
         'data'      => $data,
     ]);
 });
@@ -59,7 +57,7 @@ $app->get('/img.gif', function (Request $request) use ($app) {
     $app['storage']->set(
         $id,
         new \DateTime(),
-        array_merge($request->query->all(), $request->server->all())
+        array('query' => $request->query->all(), 'server' => $request->server->all())
     );
 
     return $response;

@@ -14,22 +14,33 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Date</th>
                             <th>Info</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for date, info in data %}
-                    <tr>
-                        <td>{{ date }}</td>
-                        <td>
-                            <ul>
-                                {% for k, v in info %}
-                                <li>{{ k }}: {{ v }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
+                    {% for id, info in data %}
+                        {% for k, connexion_data in info %}
+                        <tr>                        
+                            <td>{{ id }}</td>
+                            <td>{{ k }}</td>
+                            <td>
+                                <ul>
+                                    {% for section, values in connexion_data %}
+                                    <li>
+                                        {{ section }}: 
+                                        <ul>
+                                            {% for key, value in values %}
+                                            <li>{{ key }}: {{ value }}</li>
+                                            {% endfor %}    
+                                        </ul>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endfor %}
                     {% endfor %}
                     </tbody>
                 </table>

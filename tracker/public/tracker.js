@@ -7,8 +7,27 @@
         queryString = '';
 
     // 1. gather data
-    data['screen_width']  = window.screen.width;
-    data['screen_height'] = window.screen.height;
+    // See: https://panopticlick.eff.org to understand why these data matter
+    data['screen_width']   = window.screen.width;
+    data['screen_height']  = window.screen.height;
+    data['screen_scope']   = window.screen.colorDepth;
+    data['browser_plugin'] = [];
+    var navigatorPluginsLength = navigator.plugins.length;
+    for (var i = 0; i < navigatorPluginsLength; i++) {
+        data['browser_plugin'].push(navigator.plugins[i].name);
+    }
+    data['browser_plugin'] = data['browser_plugin'].join();
+    data['time_zone']      = new Date().getTimezoneOffset();
+    data['cookie_enabled'] = navigator.cookieEnabled;
+    data['system_fonts'] = [];
+    var d = new Detector();
+    var fontListLength = fontlist.length;
+    for (var i = 0; i < fontListLength; i++) {
+        if(d.detect(fontlist[i])) {
+            data['system_fonts'].push(fontlist[i]);
+        }
+    }
+    data['system_fonts'] = data['system_fonts'].join();
 
     var _d = [];
     for (var name in data) {
